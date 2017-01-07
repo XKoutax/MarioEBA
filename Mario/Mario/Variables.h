@@ -50,12 +50,34 @@ public:
 
 //Inamicii
 #define EPl 170 // planta inamica LEFT (pentru ca foloseste doua tiles) 30 imagini
-#define EPr 200 // planta inamica rIGHT
+#define EPr 200 // planta inamica RIGHT
 #define maxPiranhas 10 // limiteaza nr maxim de flori din harta
 #define maxWalkers 30 // limiteaza nr maxim de walkers din harta
 #define G 230 //walkers GOOMBA
 #define GOOMBA 1
 #define LEFT 1 //utilizat sa schimbe directia inamicilor
 #define RIGHT 2//bazat pe coliziune
+
+typedef struct extraAnimations
+{
+	bool busy; 
+	int SetImage;
+	int frames; 
+	int timer;
+	int id;
+	int typeOf; 
+				
+	int y;
+	int x;
+	int HighestFrame; 
+					 
+	int OriginalMapX;
+	int FinalFrame;
+	int animDelay; 
+} extraAnimations;
+
+extraAnimations anims[maxAnimations];
+
+
 
 

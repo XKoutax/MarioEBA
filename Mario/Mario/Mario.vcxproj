@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="otherStuff.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="Variables.h" />
   </ItemGroup>
