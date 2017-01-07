@@ -58,52 +58,49 @@ public:
 #define LEFT 1 //utilizat sa schimbe directia inamicilor
 #define RIGHT 2//bazat pe coliziune
 
+//se ocupa de lucruri precum coins de deasupra "?" sau floarea(coroana) de deasupra casutei "?"
+// struct este folosit pentru ca s-ar putea sa fie nevoie de mai multe animatii
+typedef struct extraAnimations
+{
+	bool busy; // se intampla ceva in elementul curent? daca da, treci la urmatorul
+	int SetImage; //utilizat sa decida care imagine urmeaza, de exemplu 100 score, 200 score
+	int frames; //ID-ul imaginii din sprite
+	int timer; //ID-ul sprite-ului
+	int id; // utilizat sa stocheze elementele 1d si 2d
+	int typeOf; // utilizat sa decida daca animatia face parte dintr-un sprite sau imagine
+				//y si x sunt utilizate pentru animatiile sprite-ului
+	int y;
+	int x;
+	int HighestFrame; //pentru ca animatiile au diferite limite de marime
+					  //utilizat ca sa calculeze distanta din timpul in care Mario a inceput animatia
+					  //si unde a mers/ajuns, asta ne ajuta sa mentinem animatia in locul corect, chiar si dupa ce se misca mapX
+	int OriginalMapX;
+	int FinalFrame; //utilizat pentru animatii care necesita o schimbare dupa, precum 1up mashroom
+	int animDelay; //utilizat pentru delay-ul animatiilor pentru fiecare imagine
+} extraAnimations;
 
+//utilizat pentru toate actiunile plantei
 typedef struct piranhaAI
 {
-	int id;//sprite id
-	int typeOf; //jumatate st sau dr
-	bool tooClose; //daca = 1, nu se mai ridica
-	bool isAlive; 
-	int plantTimer; //plants animation speed
-
-	int plantLoopTimer; //how long it waits until it comes back up again
-	int plantAnim; 
-	
-	
-	int distance;  
+	int id;//id-ul imaginii si sprite-ului
+	int typeOf; //utilizat sa decida care jumatate este, right or left
+	bool tooClose; //daca da, planta trebuie sa se opreasca din a creste
+	bool isAlive; // decide daca planta este in viata sau nu
+	int plantTimer; //se ocupa de viteza animatiei pentru planta
+	int plantLoopTimer; //cat timp asteapta pana va iesi din nou
+	int plantAnim; //stocheaza animatia curenta a plantei
+	int distance;  //cat de departe este planta de Mario
+				   //aceste variabile ajuta sa aflam exact unde pe map[][]
+				   //sunt plantele localizate, astfel putem afla care planta este numita pe harta de fapt
+				   //si sa utilizam animatia si sprite-ul corespunzator
+				   //pe scurt, ajuta planta sa functioneze independent, de exemplu se pot gasi animatii diferite in flori diferite
 	int ReferenceJ;
 	int ReferenceI;
 
 } piranhaAI;
 
 
+piranhaAI piranhaPlants[maxPiranhas * 2]; //pentru ca fiecare stocheaza o planta, de exemplu partea left sau right
 
-
-typedef struct extraAnimations
-{
-	bool busy; 
-	int SetImage;
-	int frames; 
-	int timer;
-	int id;
-	int typeOf; 
-				
-	int y;
-	int x;
-	int HighestFrame; 
-					 
-	int OriginalMapX;
-	int FinalFrame;
-	int animDelay; 
-} extraAnimations;
-
-
-
-piranhaAI piranhaPlants[maxPiranhas * 2];
-
-extraAnimations anims[maxAnimations];
-
-
-
+extraAnimations anims[maxAnimations]; //ruleaza pana la X animatii in acelasi timp
 

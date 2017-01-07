@@ -18,9 +18,6 @@ void DarkGDK()
 
 	while (LoopGDK())
 	{
-		
-
-
 		dbSync();
 	}
 	return;

@@ -29,5 +29,8 @@
     <ClInclude Include="otherStuff.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mapHandling.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
