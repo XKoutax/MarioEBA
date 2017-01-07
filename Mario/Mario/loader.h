@@ -56,6 +56,47 @@ void loader::loadCurrentLevel(int level)
 
 		};
 
+		int enemyRecorder;
+		int x = 0;
+		for (int i = 0; i < ROWS; i++)
+		{
+			for (int j = 0; j < COLS; j++)
+			{
+				map[j][i] = currentLevel[i][j];
+
+				
+				if (map[j][i] == EPl)
+				{
+					enemyRecorder = misc.findFreeSprite();
+					piranhaPlants[x].id = enemyRecorder;
+					
+
+					piranhaPlants[x].ReferenceJ = j;
+					piranhaPlants[x].ReferenceI = i;
+					dbSprite(piranhaPlants[x].id, 100, 100, EPl);
+					dbHideSprite(piranhaPlants[x].id);
+					piranhaPlants[x].typeOf = map[j][i];//left side or right side
+					piranhaPlants[x].isAlive = true;
+					x++;
+				}
+				else if (map[j][i] == EPr)
+				{
+					enemyRecorder = misc.findFreeSprite();
+					piranhaPlants[x].id = enemyRecorder;
+					
+
+					piranhaPlants[x].ReferenceJ = j;
+					piranhaPlants[x].ReferenceI = i;
+					dbSprite(piranhaPlants[x].id, 100, 100, EPr);
+					dbHideSprite(piranhaPlants[x].id);
+					piranhaPlants[x].typeOf = map[j][i];//left side or right side
+					piranhaPlants[x].isAlive = true;
+					x++;
+				}
+			}
+		}
+	}
+
 		
 }
 

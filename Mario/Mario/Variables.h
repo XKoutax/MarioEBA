@@ -58,6 +58,28 @@ public:
 #define LEFT 1 //utilizat sa schimbe directia inamicilor
 #define RIGHT 2//bazat pe coliziune
 
+
+typedef struct piranhaAI
+{
+	int id;//sprite id
+	int typeOf; //jumatate st sau dr
+	bool tooClose; //daca = 1, nu se mai ridica
+	bool isAlive; 
+	int plantTimer; //plants animation speed
+
+	int plantLoopTimer; //how long it waits until it comes back up again
+	int plantAnim; 
+	
+	
+	int distance;  
+	int ReferenceJ;
+	int ReferenceI;
+
+} piranhaAI;
+
+
+
+
 typedef struct extraAnimations
 {
 	bool busy; 
@@ -75,6 +97,10 @@ typedef struct extraAnimations
 	int FinalFrame;
 	int animDelay; 
 } extraAnimations;
+
+
+
+piranhaAI piranhaPlants[maxPiranhas * 2];
 
 extraAnimations anims[maxAnimations];
 

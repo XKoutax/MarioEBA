@@ -12,7 +12,9 @@ void DarkGDK()
 	dbBackdropOn();
 	dbBackdropColor(dbRGB(0, 255, 0));
 	
-
+	load.loadImages();
+	load.loadCurrentLevel(level);
+	load.loadSounds();
 
 	while (LoopGDK())
 	{
