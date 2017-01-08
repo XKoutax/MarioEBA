@@ -8,7 +8,7 @@ public:
 	void loadImages();
 	void loadSounds();
 };
-miscelaneous misc;
+other misc;
 
 void loader::loadSounds()
 {

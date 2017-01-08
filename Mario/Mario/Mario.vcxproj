@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mapHandling.h" />
+    <ClInclude Include="mapHandlingDetails.h" />
     <ClInclude Include="otherStuff.h" />
     <ClInclude Include="loader.h" />
     <ClInclude Include="resource.h" />
