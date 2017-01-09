@@ -9,10 +9,8 @@ public:
 #define Princess 2
 #define bottom 1 //utilizat sa defineasca tipul de coloziune
 #define top 2
-#define M 0 //unde se va gasi M pe harta, acolo va aparea Mario (nu pot fi doi M pe harta)
-//Oricare alt M de pe harta se va transforma in Air Tiles
-#define a 1 //air tile
-//tiles cu valoare peste 10 sunt utilizate pentru coliziune (poti trece prin ele)
+#define M 0 //unde se va gasi M pe harta, acolo va aparea Mario (nu pot fi doi M pe harta).			Oricare alt M de pe harta se va transforma in Air Tiles
+#define a 1 //air tile .tiles cu valoare peste 10 sunt utilizate pentru coliziune (poti trece prin ele)
 #define r 10 //restriction tile
 #define g 11 //ground tile TOP
 #define B 12 //ground tile Bottom
@@ -152,15 +150,39 @@ typedef struct piranhaAI
 	int plantLoopTimer; //cat timp asteapta pana va iesi din nou
 	int plantAnim; //stocheaza animatia curenta a plantei
 	int distance;  //cat de departe este planta de Mario
+
 				   //aceste variabile ajuta sa aflam exact unde pe map[][]
-				   //sunt plantele localizate, astfel putem afla care planta este numita pe harta de fapt
+				   //sunt localizate plantele, astfel putem afla care planta este numita pe harta de fapt
 				   //si sa utilizam animatia si sprite-ul corespunzator
-				   //pe scurt, ajuta planta sa functioneze independent, de exemplu se pot gasi animatii diferite in flori diferite
+					//PE SCURT: ajuta planta sa functioneze independent, de exemplu se pot gasi animatii diferite in flori diferite
 	int ReferenceJ;
 	int ReferenceI;
 
 } piranhaAI;
 
+
+typedef struct walkingEN 
+{
+	int id;
+	int typeOf; 
+	bool isAlive; 
+	bool touchingGround; 
+	bool walking; 
+	bool isDying; 
+	int walkingDirection; 
+	int walkingTimer; 
+	int x; 
+	int y; 
+	int oldx; 
+	int oldy;
+	int currentFrame;
+	int CollisionTimer; 
+	int LastEnemyCollided; 
+	bool ASleep; 
+
+} walkingEN;
+
+walkingEN walkers[maxWalkers];
 
 piranhaAI piranhaPlants[maxPiranhas * 2]; //pentru ca fiecare stocheaza o planta, de exemplu partea left sau right
 

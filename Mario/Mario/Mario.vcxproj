@@ -149,6 +149,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enemies.h" />
     <ClInclude Include="mapHandling.h" />
     <ClInclude Include="mapHandlingDetails.h" />
     <ClInclude Include="MarioEvents.h" />

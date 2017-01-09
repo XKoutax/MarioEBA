@@ -2,6 +2,15 @@
 #include "globstruct.h" //USED FOR MESSAGE box 
 
 
+void MarioEvents()
+{
+	myEvents.playerAnimations();
+	myEvents.tickTock();
+	myEvents.handleDeath();
+	myEvents.handleDamage();
+	myEvents.endLevel();
+}
+
 
 void DarkGDK()
 {
