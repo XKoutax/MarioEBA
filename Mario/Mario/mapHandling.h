@@ -1,6 +1,7 @@
 #pragma once
 #include "otherStuff.h"
-
+#include "MarioEvents.h" //includes  a number of events such as death taking damage and so on
+#include "Enemies.h"
 
 class mapHandling
 {
