@@ -152,7 +152,47 @@ public:
 		{
 			dbPasteImage(map[x + tilenumx][y + tilenumy], (x * tilesizex) - tempx, (y * tilesizey) - tempy);
 		}
-		
+		//tile based anims ex: animatia '1000 score' , '1 up'
+        else if(map[x + tilenumx][y + tilenumy] == SA) //score animation
+        {
+            bool foundRightElement = false; // iese din array o data ce a gasit id-ul elementului
+            // verifica daca este anim
+            for(int i = 0; i < maxAnimations && foundRightElement == false; i++)
+            {
+                if(anims[i].busy == true)
+                {
+                    if(anims[i].typeOf == IMAGE)    //IMAGE or Sprite
+                    {
+                        //daca gasim animatia
+                        if(anims[i].id == map[x + tilenumx][y + tilenumy] && anims[i].x == x + tilenumx && anims[i].y == y + tilenumy)
+                        {
+                            foundRightElement = true;
+                            //1000 score animation
+                            if(dbTimer() - anims[i].timer > 80) //frame-urile se schimba la 75 milisec
+                            {
+                                anims[i].timer = dbTimer();
+                                anims[i].frames++;
+
+                                if(anims[i].frames == anims[i].HighestFrame)
+                                {
+                                    anims[i].busy = false;
+                                    //devine o 'patratica' de  aer sau 1up mushroom
+                                    map[x + tilenumx][y + tilenumy] = anims[i].FinalFrame;
+                                }
+                            }
+                            dbPasteImage( anims[i].SetImage + anims[i].frames, ( x * tilesizex ) - tempx,  ( y * tilesizey ) - tempy );
+                        }
+                    }
+                }
+            }
+
+        }
+        //GOOMBA inainte de primul spawn
+        else if(map[x + tilenumx][y + tilenumy] == G)
+        {
+            map[x + tilenumx][y + tilenumy] = a; //patratica de aer
+            enemy.createEnemy((( x * tilesizex ) - tempx),  (y * tilesizey ) - tempy);
+        }
 		//mario spawn spot
 		else if (map[x + tilenumx][y + tilenumy] == M)
 		{
