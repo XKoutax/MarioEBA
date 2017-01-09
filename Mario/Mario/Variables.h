@@ -6,7 +6,7 @@ public:
 };
 
 #define normalMario 1
-#define FireMario 2
+#define Princess 2
 #define bottom 1 //utilizat sa defineasca tipul de coloziune
 #define top 2
 #define M 0 //unde se va gasi M pe harta, acolo va aparea Mario (nu pot fi doi M pe harta)
@@ -42,7 +42,7 @@ public:
 #define L 99 // utilizat pentru 1up
 #define C 100 //coins
 #define SA 105 //special tileset based anim
-#define f 300  // utilizat pentru "fireFlower12" pentru animatie
+#define f 300  // utilizat pentru "crown12" pentru animatie
 #define fB 115 // utilizat pentru checkpoint flag bottom
 #define fT 116 // utilizat pentru checkpoint flag top
 #define gM 117 // green mushroom
@@ -57,6 +57,68 @@ public:
 #define GOOMBA 1
 #define LEFT 1 //utilizat sa schimbe directia inamicilor
 #define RIGHT 2//bazat pe coliziune
+
+int speedy = 5;
+int screenCenterX = 380;
+int screenCenterY = 280;
+int playerX = screenCenterX;
+int playerY = screenCenterY;
+int mapX = 0;
+int mapY = 0;
+const int COLS = 170;
+const int ROWS = 12;
+int level = 1;
+
+
+int mario = 2;
+int marioWalk = 3;
+int marioJump = 4;
+
+int PrincessStill = 5;
+int PrincessWalk = 6;
+int PrincessJump = 7;
+
+
+
+int walkingTimer = dbTimer(); 
+int jumpStartTimer = dbTimer(); 
+const float GRAVITY = 0.2;
+bool jumping = false;
+bool falling = false; 
+bool touchingGround = false;
+int touchingGroundTimer = dbTimer(); 
+int currentMario; 
+bool walkingRight = false;
+bool walkingLeft = false;
+bool takingDamage = false; 
+bool marioSpawned = false; 
+bool CheckPointReached = false;
+bool TEMPGombaSpawned = false;
+
+bool EndGame = false;
+int speedTimer = dbTimer();
+
+
+
+int coins = 0;
+int time;
+int gameTimer = dbTimer();
+int score;
+int lifes;
+int checkPointX;
+int checkPointY;
+int checkPlayerX;
+int checkPlayerY;
+int levelOver = 0;
+bool stopMovement = false;
+
+int deathFlash;
+int damageFlashes;
+bool IsMarioAlive = false;
+bool dying = false;
+int flashTimer = dbTimer();
+
+
 
 //se ocupa de lucruri precum coins de deasupra "?" sau floarea(coroana) de deasupra casutei "?"
 // struct este folosit pentru ca s-ar putea sa fie nevoie de mai multe animatii

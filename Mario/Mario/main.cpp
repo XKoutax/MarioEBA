@@ -18,6 +18,10 @@ void DarkGDK()
 
 	while (LoopGDK())
 	{
+		mapping.playSounds();
+		mapping.displayLevel();
+		mapping.displayInformation();
+
 		dbSync();
 	}
 	return;

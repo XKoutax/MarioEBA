@@ -83,6 +83,12 @@
     <ClInclude Include="mapHandlingDetails.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MarioEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Phy and movement.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="D:\Mario\Mario clone solution\rugga help\Mario\jump.png">

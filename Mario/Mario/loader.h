@@ -108,9 +108,9 @@ void loader::loadImages()
 	dbLoadImage("mario//still.png", mario, 1);
 	dbLoadImage("mario//walk.png", marioWalk, 1);
 	dbLoadImage("mario//jump.png", marioJump, 1);
-	dbLoadImage("mario//stillFire.png", FireMarioStill, 1);
-	dbLoadImage("mario//walkFire.png", FireMarioWalk, 1);
-	dbLoadImage("mario//JumpFire.png", FireMarioJump, 1);
+	dbLoadImage("mario//stillPrincess.png", PrincessStill, 1);
+	dbLoadImage("mario//walkPrincess.png", PrincessWalk, 1);
+	dbLoadImage("mario//JumpPrincess.png", PrincessJump, 1);
 
 
 
@@ -192,19 +192,19 @@ void loader::loadImages()
 	dbLoadImage("environment//Rewards//coin006.png", C + 5);
 	dbLoadImage("environment//Rewards//coin001.png", C + 6);
 
-	//load fire flower and anims
-	dbLoadImage("environment//Rewards//FireFlower1.png", f);
-	dbLoadImage("environment//Rewards//FireFlower2.png", f + 1);
-	dbLoadImage("environment//Rewards//FireFlower3.png", f + 2);
-	dbLoadImage("environment//Rewards//FireFlower4.png", f + 3);
-	dbLoadImage("environment//Rewards//FireFlower5.png", f + 4);
-	dbLoadImage("environment//Rewards//FireFlower6.png", f + 5);
-	dbLoadImage("environment//Rewards//FireFlower7.png", f + 6);
-	dbLoadImage("environment//Rewards//FireFlower8.png", f + 7);
-	dbLoadImage("environment//Rewards//FireFlower9.png", f + 8);
-	dbLoadImage("environment//Rewards//FireFlower10.png", f + 9);
-	dbLoadImage("environment//Rewards//FireFlower11.png", f + 10);
-	dbLoadImage("environment//Rewards//FireFlower12.png", f + 11);
+	//load crown and anims
+	dbLoadImage("environment//Rewards//Crown1.png", f);
+	dbLoadImage("environment//Rewards//Crown2.png", f + 1);
+	dbLoadImage("environment//Rewards//Crown3.png", f + 2);
+	dbLoadImage("environment//Rewards//Crown4.png", f + 3);
+	dbLoadImage("environment//Rewards//Crown5.png", f + 4);
+	dbLoadImage("environment//Rewards//Crown6.png", f + 5);
+	dbLoadImage("environment//Rewards//Crown7.png", f + 6);
+	dbLoadImage("environment//Rewards//Crown8.png", f + 7);
+	dbLoadImage("environment//Rewards//Crown9.png", f + 8);
+	dbLoadImage("environment//Rewards//Crown10.png", f + 9);
+	dbLoadImage("environment//Rewards//Crown11.png", f + 10);
+	dbLoadImage("environment//Rewards//Crown12.png", f + 11);
 
 
 
