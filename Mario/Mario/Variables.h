@@ -46,6 +46,7 @@ public:
 #define gM 117 // green mushroom
 #define maxAnimations 20 // limiteaza nr maxim de animatii speciale gen coin-urile de deasupra "q"
 
+int currentWalker = 1;
 //Inamicii
 #define EPl 170 // planta inamica LEFT (pentru ca foloseste doua tiles) 30 imagini
 #define EPr 200 // planta inamica RIGHT
@@ -55,6 +56,7 @@ public:
 #define GOOMBA 1
 #define LEFT 1 //utilizat sa schimbe directia inamicilor
 #define RIGHT 2//bazat pe coliziune
+
 
 int speedy = 5;
 int screenCenterX = 380;
