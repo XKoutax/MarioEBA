@@ -57,7 +57,15 @@ int currentWalker = 1;
 #define LEFT 1 //utilizat sa schimbe directia inamicilor
 #define RIGHT 2//bazat pe coliziune
 
+//utilizate pentru animatii
+#define SPRITE 1
+#define IMAGE 2
 
+//Enemies vars end
+int numoftilesx = 65;
+int numoftilesy = 65;
+int tilesizex = 65;
+int tilesizey = 65;
 int speedy = 5;
 int screenCenterX = 380;
 int screenCenterY = 280;
@@ -67,13 +75,17 @@ int mapX = 0;
 int mapY = 0;
 const int COLS = 170;
 const int ROWS = 12;
-int level = 1;
+int level = 2;
+int matrix[ROWS][COLS];
+int lin;
+int col;
 
-
+//mario
 int mario = 2;
 int marioWalk = 3;
 int marioJump = 4;
 
+//mario princess
 int PrincessStill = 5;
 int PrincessWalk = 6;
 int PrincessJump = 7;
@@ -98,7 +110,45 @@ bool TEMPGombaSpawned = false;
 bool EndGame = false;
 int speedTimer = dbTimer();
 
+//variabile pt animatii
+int qBoxAnim = 0; //creste animatia pentru Q boxes
+int questionBoxTimer = dbTimer(); //cat de multe ori se invarte Question boxes
 
+
+int coinAnim = 0; 
+int coinTimer = dbTimer(); 
+
+//harta aici
+bool spaceKeyPressed = false;//opreste saritura daca se tine apasat pe space
+int map[COLS][ROWS];
+
+//sunetele, var incep cu S
+int SmainTheme = 1;
+int ScoinPickup = 2;
+int SFlowerAppear = 3;
+int Sjump = 4;
+int Sdeath = 5;
+int Sbrick = 6;
+int Sbump = 7;
+int SFlowerPickup = 8;
+int SnewLife = 11;
+int SendLevel = 12;
+int StimeWarning = 13;
+int SlevelClear = 14;
+int Spowerup = 15; // used for 1up
+int SplantCrunch = 16; // used for 1up
+int ScheckPoint = 93;
+int Sstomp = 17; //stomping on enemies sound
+int SPipeAndDamage = 18; //used for when turning from fire to normal or going through a plant
+
+//image used for the score animations
+int score200_1 = 71;// 71 to 81
+int score100_1 = 270;// 270 to 279 // cand omoara inamici
+int score1000_1 = 82;// 82 to 93
+int check_1 = 120; // imagini checkpoint, 13 in total
+int dust_1 = 133; // dust images, 8 in total
+int _1up_1 = 245; // 14 imagini pentru animatie
+int _1upText_1 = 280;
 
 int coins = 0;
 int time;
