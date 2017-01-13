@@ -61,11 +61,16 @@ int currentWalker = 1;
 #define SPRITE 1
 #define IMAGE 2
 
+#define IMAGE 2
+int currentWalker = 1; //utilizat sa creeze noi walkers si noi id's
+int speedxEN = 2; //viteza de miscare a inamicilor
+
 //Enemies vars end
 int numoftilesx = 65;
 int numoftilesy = 65;
 int tilesizex = 65;
 int tilesizey = 65;
+int speedx = 5;
 int speedy = 5;
 int screenCenterX = 380;
 int screenCenterY = 280;
@@ -73,12 +78,18 @@ int playerX = screenCenterX;
 int playerY = screenCenterY;
 int mapX = 0;
 int mapY = 0;
+int oldmapX = 0;
+int oldmapY = 0;
+int oldx1 = 0;
+int oldy1 = 0;
 const int COLS = 170;
 const int ROWS = 12;
 int level = 2;
-int matrix[ROWS][COLS];
-int lin;
-int col;
+
+int tilenumx = 0;
+int tilenumy = 0;
+int tempx = 0;
+int tempy = 0;
 
 //mario
 int mario = 2;
@@ -162,6 +173,7 @@ int checkPlayerY;
 int levelOver = 0;
 bool stopMovement = false;
 
+//death vars
 int deathFlash;
 int damageFlashes;
 bool IsMarioAlive = false;
