@@ -85,7 +85,7 @@ public:
 		{
 			if (piranhaPlants[i].isAlive)
 			{
-				if (piranhaPlants[i].typeOf == EP || piranhaPlants[i].typeOf == EPr)
+				if (piranhaPlants[i].typeOf == EPl || piranhaPlants[i].typeOf == EPr)
 				{
 					piranhaPlants[i].distance = misc.get2dDistance(dbSpriteX(mario), dbSpriteY(mario), dbSpriteX(piranhaPlants[i].id), dbSpriteY(piranhaPlants[i].id));
 

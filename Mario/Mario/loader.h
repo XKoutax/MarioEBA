@@ -701,12 +701,12 @@ void loader::loadCurrentLevel(int level)
 			{
 				map[j][i] = currentLevel[i][j];
 
-				
+
 				if (map[j][i] == EPl)
 				{
 					enemyRecorder = misc.findFreeSprite();
 					piranhaPlants[x].id = enemyRecorder;
-					
+
 
 					piranhaPlants[x].ReferenceJ = j;
 					piranhaPlants[x].ReferenceI = i;
@@ -720,7 +720,7 @@ void loader::loadCurrentLevel(int level)
 				{
 					enemyRecorder = misc.findFreeSprite();
 					piranhaPlants[x].id = enemyRecorder;
-					
+
 
 					piranhaPlants[x].ReferenceJ = j;
 					piranhaPlants[x].ReferenceI = i;
@@ -782,8 +782,8 @@ void loader::loadCurrentLevel(int level)
 
 
 }
-		
-}
+
+
 
 void loader::loadImages()
 {
@@ -988,7 +988,7 @@ void loader::loadImages()
 
 
 
-																						//ENEMY SPRITES
+	//ENEMY SPRITES
 
 
 

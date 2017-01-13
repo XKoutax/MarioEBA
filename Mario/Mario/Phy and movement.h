@@ -15,7 +15,7 @@ class phyAndMovement
 {
 public:
 
-	
+
 	void phyAndMovement::playerJump()
 	{
 		if (dbSpaceKey() && spaceKeyPressed == false)
@@ -25,7 +25,7 @@ public:
 				dbPlaySound(Sjump);
 				spaceKeyPressed = true;
 				touchingGround = false;
-				jumpStartTimer = dbTimer(); 
+				jumpStartTimer = dbTimer();
 				jumping = true;
 			}
 		}
@@ -46,7 +46,7 @@ public:
 
 	void phyAndMovement::gravity()							//CADEREA
 	{
-		if (IaMarioAlive == true /* && stopMovement == false*/)
+		if (IsMarioAlive == true /* && stopMovement == false*/)
 		{
 			if (!touchingGround)					//nu atince pamantul. si nu sare. deci e in cadere
 			{
@@ -135,15 +135,15 @@ public:
 	{
 
 
-		
+
 		int lefttilenum = int(playerX / tilesizex);
 		int righttilenum = int((playerX + (tilesizex - 1)) / tilesizex);
 
-		
+
 		int toptilenum = int(playerY / tilesizey);
 		int bottomtilenum = int((playerY + (tilesizey - 1)) / (tilesizey));
 
-	
+
 		int oldlefttilenum = int(oldx1 / tilesizex);
 		int oldrighttilenum = int((oldx1 + (tilesizex - 1)) / tilesizex);
 		//gets which tiles the old top and bottom co-ordinates of the player are on
@@ -151,16 +151,16 @@ public:
 		int oldbottomtilenum = int((oldy1 + (tilesizey - 1)) / (tilesizey));
 
 
-		
+
 
 		bool collidedWithSomething = false;//was there a collision?
 		int typeOfCollision = 0;
 
-		
-		int collidedWithX = 0; 
-		int collidedWithY = 0; 
 
-							   // collision cu partea din STANGA SUS
+		int collidedWithX = 0;
+		int collidedWithY = 0;
+
+		// collision cu partea din STANGA SUS
 		if (map[lefttilenum][oldtoptilenum] >= 10)
 		{
 			if (map[lefttilenum][oldtoptilenum] < 100)
@@ -321,7 +321,7 @@ public:
 				}
 			}
 
-			
+
 			oldmapX = mapX;
 			oldmapY = mapY;
 

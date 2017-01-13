@@ -62,10 +62,10 @@ int currentWalker = 1;
 #define IMAGE 2
 
 #define IMAGE 2
-int currentWalker = 1; //utilizat sa creeze noi walkers si noi id's
+//int currentWalker = 1; //utilizat sa creeze noi walkers si noi id's
 int speedxEN = 2; //viteza de miscare a inamicilor
 
-//Enemies vars end
+				  //Enemies vars end
 int numoftilesx = 65;
 int numoftilesy = 65;
 int tilesizex = 65;
@@ -84,7 +84,7 @@ int oldx1 = 0;
 int oldy1 = 0;
 const int COLS = 170;
 const int ROWS = 12;
-int level = 2;
+int level = 1;
 
 int tilenumx = 0;
 int tilenumy = 0;
@@ -103,18 +103,18 @@ int PrincessJump = 7;
 
 
 
-int walkingTimer = dbTimer(); 
-int jumpStartTimer = dbTimer(); 
+int walkingTimer = dbTimer();
+int jumpStartTimer = dbTimer();
 const float GRAVITY = 0.2;
 bool jumping = false;
-bool falling = false; 
+bool falling = false;
 bool touchingGround = false;
-int touchingGroundTimer = dbTimer(); 
-int currentMario; 
+int touchingGroundTimer = dbTimer();
+int currentMario;
 bool walkingRight = false;
 bool walkingLeft = false;
-bool takingDamage = false; 
-bool marioSpawned = false; 
+bool takingDamage = false;
+bool marioSpawned = false;
 bool CheckPointReached = false;
 bool TEMPGombaSpawned = false;
 
@@ -126,8 +126,8 @@ int qBoxAnim = 0; //creste animatia pentru Q boxes
 int questionBoxTimer = dbTimer(); //cat de multe ori se invarte Question boxes
 
 
-int coinAnim = 0; 
-int coinTimer = dbTimer(); 
+int coinAnim = 0;
+int coinTimer = dbTimer();
 
 //harta aici
 bool spaceKeyPressed = false;//opreste saritura daca se tine apasat pe space
@@ -152,7 +152,7 @@ int ScheckPoint = 93;
 int Sstomp = 17; //stomping on enemies sound
 int SPipeAndDamage = 18; //used for when turning from fire to normal or going through a plant
 
-//image used for the score animations
+						 //image used for the score animations
 int score200_1 = 71;// 71 to 81
 int score100_1 = 270;// 270 to 279 // cand omoara inamici
 int score1000_1 = 82;// 82 to 93
@@ -218,31 +218,31 @@ typedef struct piranhaAI
 				   //aceste variabile ajuta sa aflam exact unde pe map[][]
 				   //sunt localizate plantele, astfel putem afla care planta este numita pe harta de fapt
 				   //si sa utilizam animatia si sprite-ul corespunzator
-					//PE SCURT: ajuta planta sa functioneze independent, de exemplu se pot gasi animatii diferite in flori diferite
+				   //PE SCURT: ajuta planta sa functioneze independent, de exemplu se pot gasi animatii diferite in flori diferite
 	int ReferenceJ;
 	int ReferenceI;
 
 } piranhaAI;
 
 
-typedef struct walkingEN 
+typedef struct walkingEN
 {
 	int id;
-	int typeOf; 
-	bool isAlive; 
-	bool touchingGround; 
-	bool walking; 
-	bool isDying; 
-	int walkingDirection; 
-	int walkingTimer; 
-	int x; 
-	int y; 
-	int oldx; 
+	int typeOf;
+	bool isAlive;
+	bool touchingGround;
+	bool walking;
+	bool isDying;
+	int walkingDirection;
+	int walkingTimer;
+	int x;
+	int y;
+	int oldx;
 	int oldy;
 	int currentFrame;
-	int CollisionTimer; 
-	int LastEnemyCollided; 
-	bool ASleep; 
+	int CollisionTimer;
+	int LastEnemyCollided;
+	bool ASleep;
 
 } walkingEN;
 
@@ -252,3 +252,4 @@ piranhaAI piranhaPlants[maxPiranhas * 2]; //pentru ca fiecare stocheaza o planta
 
 extraAnimations anims[maxAnimations]; //ruleaza pana la X animatii in acelasi timp
 
+int matrix[ROWS][COLS];
