@@ -12,7 +12,7 @@ public:
 	{
 		checkPlayerX = playerX;
 		checkPlayerY = playerY;
-		time = 400;
+		Ttime = 400;
 		lifes = 3;
 		score = 0;
 		IsMarioAlive = true;
@@ -25,10 +25,10 @@ public:
 			if (dbTimer() - gameTimer > 1000)
 			{
 				gameTimer = dbTimer();
-				if (time > 0) time--;
+				if (Ttime > 0) Ttime--;
 				else killMario();
 
-				if (time == 200)            //daca se scurge timpul, killMario. daca a trecut jumate din timp, alert
+				if (Ttime == 200)            //daca se scurge timpul, killMario. daca a trecut jumate din timp, alert
 				{
 					dbPlaySound(StimeWarning);
 				}
@@ -359,7 +359,7 @@ public:
 		playerY = checkPlayerY;
 		mapX = checkPointX;
 		mapY = 0;
-		time = 400; //reset time
+		Ttime = 400; //reset time
 
 	}
 

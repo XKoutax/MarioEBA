@@ -151,7 +151,7 @@ int _1up_1 = 245; // 14 imagini pentru animatie
 int _1upText_1 = 280;
 
 int coins = 0;
-int time;
+int Ttime;
 int gameTimer = dbTimer();
 int score;
 int lifes;

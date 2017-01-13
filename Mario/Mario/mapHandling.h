@@ -44,7 +44,7 @@ public:
 
 		//afiseaza timpul ramas
 		char timeLeft[100];
-		sprintf_s(timeLeft, 200, "Time \n %d", time);
+		sprintf_s(timeLeft, 200, "Time \n %d", Ttime);
 		dbText(500, 25, timeLeft);
 	}
 

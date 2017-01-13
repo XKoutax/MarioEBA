@@ -1,5 +1,6 @@
 #pragma once
-
+#include <cstdlib>
+#include <ctime>
 //Load la toate imaginile + mapa
 class loader
 {
@@ -7,6 +8,7 @@ public:
 	void loadCurrentLevel(int level);
 	void loadImages();
 	void loadSounds();
+	void loadGenerator();
 };
 other misc;
 
@@ -23,7 +25,7 @@ void loader::loadSounds()
 	dbLoadSound("Sounds//checkpoint 1.wav", ScheckPoint);
 	dbLoadSound("Sounds//life.wav", SnewLife);
 	dbLoadSound("Sounds//Flag pole.wav", SendLevel);
-	dbLoadSound("Sounds//Time warning.wav", StimeWarning);
+	dbLoadSound("Sounds//warning.wav", StimeWarning);
 	dbLoadSound("Sounds//clear level.wav", SlevelClear);
 	dbLoadSound("Sounds//Pick up powerup.wav", Spowerup);
 	dbLoadSound("Sounds//plant crunch.wav", SplantCrunch);
@@ -31,6 +33,641 @@ void loader::loadSounds()
 	dbLoadSound("Sounds//PipeAndDamage.wav", SPipeAndDamage);
 }
 
+
+void loader::loadGenerator()
+{
+	int i = 0;
+	int j = 0;
+
+	srand(time(NULL));
+
+	int maxClouds = rand() % 10 + 20;		//intre 20 - 30
+	int maxBrix = rand() % 20 + 40;			//
+	int maxQc = rand() % 10 + 20;			//intre 20 si 29
+	int maxCoins = rand() % 20 + 20;			//intre 20 si 39
+	int maxGP = 4;
+	int maxGoomba = rand() % 6 + 5;
+	int maxGround = 10;
+	int maxCrown = 3;
+	int maxOneup = 2;
+
+
+
+	//PRE STABILITE
+	for (i = 0; i<ROWS; i++)
+		for (j = 0; j<COLS; j++)
+		{
+			if (i == 0 || (j == 0 && i < 9))
+				matrix[i][j] = r;
+			else if (i == 9)
+				matrix[i][j] = g;
+			else if (i == 10)
+				matrix[i][j] = B;
+			else if (i == 11)
+				matrix[i][j] = d;
+			else
+				matrix[i][j] = a;
+		}
+
+	matrix[8][100] = fB;
+	matrix[7][100] = fT;
+
+	//END PRE STABILITE
+
+
+
+
+	int linie = 0;
+	int coloana = 0;
+
+
+
+	//CLOUDS
+	for (i = 1; i <= maxClouds; i++)
+	{
+		do
+		{
+			linie = 1 + rand() % 3;
+			coloana = 5 + rand() % 164;
+		} while (matrix[linie][coloana] != a &&
+			matrix[linie][coloana + 1] != a &&
+			matrix[linie][coloana - 1] != a &&
+			matrix[linie + 1][coloana] != a &&
+			matrix[linie + 1][coloana + 1] != a &&
+			matrix[linie + 1][coloana - 1] != a &&
+			matrix[linie - 1][coloana] != a &&
+			matrix[linie - 1][coloana - 1] != a &&
+			matrix[linie - 1][coloana + 1] != a);
+
+		matrix[linie][coloana] = c;
+
+	}
+
+
+
+
+	//BRICKS
+	for (i = 1; i <= maxBrix; i++)
+	{
+		do
+		{
+			linie = 4 + rand() % 3;
+			coloana = 5 + rand() % 155;
+		} while (matrix[linie][coloana] != a);
+
+
+		if (8 - linie >= 3)
+		{
+
+			if (linie == 5)
+				for (int kk = -3; kk <= 3; kk++)
+				{
+					int dublu = 0;
+					if (kk == 0) continue;
+					if (matrix[linie + 1][coloana + kk] == b)
+					{
+						matrix[linie][coloana] = b; //maxBrix--;
+						dublu = rand() % 2;
+						if (dublu == 1) { matrix[linie + 1][coloana + kk - 1] = b; maxBrix--; }
+						break;
+					}
+
+					if (matrix[linie + 2][coloana + k] == b)
+					{
+						if (kk == -3 || kk == 3) continue;
+
+						matrix[linie][coloana] = b; //maxBrix--;
+						dublu = rand() % 2;
+						if (dublu == 0) { matrix[linie + 1][coloana + kk - 1] = b; maxBrix--; }
+
+						break;
+					}
+				}
+
+			if (linie == 4)
+			{
+				int gasitL6 = 0;
+				for (int kk = -2; kk <= 2; kk++)
+				{
+					if (kk == 0) continue;
+					if (matrix[linie + 2][coloana + kk] == b)
+					{
+						matrix[linie][coloana] = b;
+						//maxBrix--;
+						gasitL6 = 1;
+					}
+				}
+
+				if (gasitL6 == 0)
+				{
+					for (int kk = -3; kk <= 3; kk++)
+					{
+						if (kk == 0) continue;
+						if (matrix[5][coloana + kk] == b)
+						{
+							break;
+						}
+					}
+
+					for (int jjj = -2; jjj <= 2; jjj++)
+					{
+						if (jjj == 0) continue;
+
+						if (matrix[7][coloana + jjj] == b)
+						{
+							matrix[linie][coloana] = b;
+							//maxBrix--;
+						}
+					}
+				}
+
+			}
+		}
+		else
+		{
+			matrix[linie][coloana] = b;
+			maxBrix--;
+		}
+		int OK = rand() % 4;
+		switch (OK)
+		{
+		case 0:
+		{
+
+			if (matrix[linie][coloana + 1] == a && matrix[linie - 1][coloana + 1] == a && matrix[linie - 1][coloana + 2] == a)
+			{
+				matrix[linie][coloana + 1] = b;
+				matrix[linie - 1][coloana + 1] = b;
+				matrix[linie - 1][coloana + 2] = b;
+				maxBrix = maxBrix - 3;
+			}
+			break;
+		}
+
+		case 1:
+		{
+
+			if (matrix[linie][coloana + 1] == a)
+			{
+				matrix[linie][coloana + 1] = qC;
+				maxQc--;									//de declarat
+			}
+
+			if (matrix[linie][coloana + 2] == a)
+			{
+				matrix[linie][coloana + 2] = b;
+
+			}
+
+			break;
+		}
+
+		case 2:
+		{
+			if (matrix[linie][coloana + 1] == a && matrix[linie][coloana + 2] == a)
+			{
+				matrix[linie][coloana] = b;
+				matrix[linie][coloana + 1] = b;						// b b b 
+				matrix[linie][coloana + 2] = b;
+
+				int OKc = rand() % 2;
+				switch (OKc)
+				{
+				case 1:
+				{
+					if (matrix[linie - 1][coloana] == a && matrix[linie - 1][coloana + 1] == a && matrix[linie - 1][coloana + 2] == a)
+					{
+						matrix[linie - 1][coloana] = C;				//  C C C
+						matrix[linie - 1][coloana + 1] = C;				//	  
+						matrix[linie - 1][coloana + 2] = C;				//	    
+						maxCoins = maxCoins - 3;
+					}
+					break;
+
+				}
+
+				case 0:
+				{
+					if (matrix[linie - 1][coloana + 4] == a && matrix[linie][coloana + 5] == a && matrix[linie + 1][coloana + 6] == a)
+					{
+						matrix[linie - 1][coloana + 4] = C;			// C
+						matrix[linie][coloana + 5] = C;			//   C
+						matrix[linie + 1][coloana + 6] = C;			//     C
+						maxCoins = maxCoins - 3;
+					}
+
+
+				}
+
+
+				}
+
+
+
+			}
+
+
+
+			break;
+		}
+
+		}
+
+	}
+
+
+
+
+	//PAMANT IN AER
+
+	do {
+		linie = 4 + rand() % 3;
+		coloana = 5 + rand() % 150;
+	} while (matrix[linie][coloana] != a && matrix[linie][coloana + 1] != a && matrix[linie - 1][coloana + 1] != a);
+
+	for (int i = 1; i <= maxGround; i++)
+	{
+		int okGround = rand() % 2;
+		switch (okGround)
+		{
+		case 0:
+		{
+			if (matrix[linie][coloana - 1] == a && matrix[linie - 1][coloana - 1] == a && matrix[linie - 1][coloana] == a && matrix[linie - 2][coloana] == a && matrix[linie][coloana + 1] == a && matrix[linie][coloana + 3] == a && matrix[linie][coloana + 2] == a)
+			{
+				matrix[linie][coloana] = g;							//      g
+				matrix[linie][coloana + 1] = g;						//   g  g  g  
+				matrix[linie - 1][coloana + 1] = g;						//
+				matrix[linie][coloana + 2] = g;
+			}
+			break;
+		}
+		case 1:
+		{
+			if (matrix[linie][coloana + 2] == a && matrix[linie - 1][coloana + 2] == a && matrix[linie - 1][coloana] == a && matrix[linie][coloana + 3] == a)
+			{
+				matrix[linie][coloana] = g;
+				matrix[linie][coloana + 1] = g;
+				matrix[linie][coloana + 2] = g;
+				matrix[linie][coloana + 3] = g;
+			}
+			break;
+		}
+		}
+	}
+
+
+
+
+
+	//MAX GREEN PIPES ----> CAN HAVE PLANTS, COINS OR NOTHING. 
+	for (i = 1; i <= maxGP; i++)
+	{
+
+		do
+		{
+			coloana = 40 + rand() % 116;		//intre 40 si 155
+
+		} while (matrix[8][coloana] != a &&
+			matrix[8][coloana + 1] != a &&
+			matrix[7][coloana] != a &&
+			matrix[7][coloana + 1] != a &&
+			matrix[6][coloana] != a &&
+			matrix[6][coloana + 1] != a &&
+			matrix[8][coloana - 1] != a &&
+			matrix[8][coloana + 2] != a &&
+			matrix[7][coloana - 1] != a &&
+			matrix[7][coloana + 2] != a &&
+			matrix[6][coloana - 1] != a &&
+			matrix[6][coloana + 2] != a &&
+			matrix[5][coloana - 1] != a &&
+			matrix[5][coloana] != a &&
+			matrix[5][coloana + 1] != a &&
+			matrix[5][coloana + 1] != a);
+
+
+		int okGP = rand() % 2;
+
+		switch (okGP)
+		{
+		case 0:												// din 4 bucati
+		{
+			matrix[8][coloana] = p3;
+			matrix[8][coloana + 1] = p4;
+			matrix[7][coloana] = p1;						//		p1 p2
+			matrix[7][coloana + 1] = p2;						//		p3 p4
+			int okPlantOrCoin = rand() % 3;					//
+			switch (okPlantOrCoin)
+			{
+			case 1:
+			{
+				matrix[6][coloana] = EPl;				//	EPL EPR
+				matrix[6][coloana + 1] = EPr;				//	p1 p2
+				break;									//	p3 p4
+			}
+
+			case 2:
+			{
+				matrix[6][coloana] = C;
+				matrix[6][coloana + 1] = C;
+				maxCoins = maxCoins - 2;
+				break;
+			}
+			}
+
+			break;
+
+		}
+
+		case 1:												//din 6 bucati
+		{
+			if (matrix[5][coloana] == a && matrix[5][coloana + 1] == a && matrix[5][coloana - 1] == a && matrix[5][coloana + 2] == a && matrix[4][coloana] == a && matrix[4][coloana + 1] == a && matrix[4][coloana - 1] == a && matrix[4][coloana + 2] == a)
+			{
+
+
+				matrix[8][coloana] = p3;
+				matrix[8][coloana + 1] = p4;
+				matrix[7][coloana] = p3;
+				matrix[7][coloana + 1] = p4;
+				matrix[6][coloana] = p1;
+				matrix[6][coloana + 1] = p2;
+
+				int okPlantOrCoin = rand() % 3;
+				switch (okPlantOrCoin)
+				{
+				case 1:
+				{
+					matrix[5][coloana] = EPl;
+					matrix[5][coloana + 1] = EPr;
+					break;
+				}
+
+				case 2:
+				{
+					matrix[5][coloana] = C;							// C C
+					matrix[5][coloana + 1] = C;						//p1 p2
+					maxCoins = maxCoins - 2;							//p3 p4
+					break;											//p3 p4
+				}
+				}
+			}
+
+
+			break;
+		}
+		}
+	}
+
+
+	//COINS
+
+	for (i = 1; i <= maxCoins; i++)
+	{
+		do
+		{
+			linie = 4 + rand() % 4;
+			coloana = 5 + rand() % 164;
+		} while (matrix[linie][coloana] != a);
+
+		int OK = rand() % 3;
+
+		switch (OK)
+		{
+
+		case 1:
+		{
+
+			if ((matrix[linie + 1][coloana - 1] == b || matrix[linie + 1][coloana] == b || matrix[linie + 1][coloana + 1] == b) && matrix[linie - 1][coloana] == a && matrix[linie - 2][coloana] == a)
+			{
+				matrix[linie][coloana] = C;										//C
+				matrix[linie - 1][coloana] = C;									//C
+				matrix[linie - 2][coloana] = C;									//C
+				maxCoins = maxCoins - 2;
+
+			}
+			break;
+		}
+
+		case 2:
+		{
+			matrix[linie][coloana] = C;											//C
+			break;
+		}
+
+		}
+
+
+	}
+
+
+	for (i = 1; i <= maxGoomba; i++)
+	{
+		do
+		{
+			linie = 1 + rand() % 8;
+			coloana = 15 + rand() % 140;
+
+		} while (matrix[linie][coloana] != a && matrix[linie][coloana + 1] != a && matrix[linie][coloana - 1] != a &&
+			((matrix[linie - 1][coloana] == b && matrix[linie - 1][coloana - 1] == b && matrix[linie - 1][coloana + 1] == b) || (matrix[linie - 1][coloana] == g && matrix[linie - 1][coloana - 1] == g && matrix[linie - 1][coloana + 1] == g)));
+
+		int OKgoomba = rand() % 3;
+		switch (OKgoomba)
+		{
+		case 0:
+		{
+			matrix[linie][coloana] = G;			//spawneaza pe pamant/brick, NEAPARAT IMEDIAT deasupra acestora.
+			break;
+		}
+
+		case 1:
+		{
+			do
+			{
+				linie = 1 + rand() % 8;
+				coloana = 5 + rand() % 155;
+
+			} while (matrix[linie][coloana] != a && (matrix[linie + 1][coloana] != b || matrix[linie + 1][coloana] != b));
+			matrix[linie][coloana] = G;
+			break;
+
+		}
+
+		case 2:
+		{
+			do
+			{
+				linie = 1 + rand() % 8;
+				coloana = 5 + rand() % 155;
+			} while (matrix[linie][coloana] != a && matrix[linie + 1][coloana] != a && matrix[linie + 2][coloana] != b && matrix[linie + 2][coloana - 1] != b && matrix[linie + 3][coloana - 1] != b);
+
+			matrix[linie][coloana] = G;
+
+			break;
+		}
+
+
+		}
+
+
+	}
+
+
+
+	//SCARI + HOLE + END
+	int OKhole = 0;
+	int tries = 70;
+
+	do
+	{
+		tries--;
+		OKhole = 1;
+		coloana = rand() % 130 + 10;
+
+		for (i = 3; i <= 8; i++)
+		{
+			for (j = coloana; j <= coloana + 10; j++)
+			{
+				if (i == 6)
+					if ((j == coloana + 10) || (j == coloana))
+						continue;
+
+				if (i == 5)
+					if ((j < coloana + 2) || (j > coloana + 8))
+						continue;
+
+				if (i == 4)
+					if ((j < coloana + 3) || (j > coloana + 7))
+						continue;
+
+				if (i == 3)
+					if ((j < coloana + 4) || (j > coloana + 6))
+						continue;
+
+				if (matrix[i][j] != a)
+				{
+					OKhole = 0;
+					break;
+				}
+			}
+
+			if (OKhole == 0 && tries <0)
+				break;
+		}
+
+	} while (OKhole != 1);
+
+
+	matrix[8][coloana] = k;
+	matrix[8][coloana + 1] = k;
+	matrix[8][coloana + 2] = k;
+	matrix[7][coloana + 1] = k;
+	matrix[7][coloana + 2] = k;
+	matrix[6][coloana + 2] = k;
+	matrix[8][coloana + 6] = k;
+	matrix[8][coloana + 7] = k;
+	matrix[8][coloana + 8] = k;
+	matrix[7][coloana + 6] = k;
+	matrix[7][coloana + 7] = k;
+	matrix[6][coloana + 6] = k;
+
+	matrix[9][coloana + 3] = a;
+	matrix[9][coloana + 4] = a;
+	matrix[9][coloana + 5] = a;
+	matrix[10][coloana + 3] = a;
+	matrix[10][coloana + 4] = a;
+	matrix[10][coloana + 5] = a;
+	// END SCARI + HOLE + SCARI
+
+
+	//CROWNS
+	for (i = 1; i <= maxCrown; i++)
+	{
+		do
+		{
+			linie = rand() % 2 + 5;
+			coloana = rand() % 110 + 20;
+		} while (matrix[linie][coloana] != a && matrix[linie + 1][coloana] != a && matrix[linie + 1][coloana + 1] != a && matrix[linie + 1][coloana - 1] != a &&
+			matrix[linie][coloana] != a);
+
+		if (linie == 5)
+			if ((matrix[linie + 3][coloana - 1] == a || matrix[linie + 3][coloana - 1] == G) && (matrix[linie + 3][coloana] == a || matrix[linie + 3][coloana] == G) && (matrix[linie + 3][coloana + 1] == a || matrix[linie + 3][coloana + 1] == G))
+			{
+				matrix[linie + 3][coloana - 1] = g;
+				matrix[linie + 3][coloana] = g;
+				matrix[linie + 3][coloana + 1] = g;
+			}
+
+		matrix[linie][coloana] = qF;
+
+	}
+
+
+	// INVISIBLE MUSHROOM
+
+
+
+	for (i = 1; i <= maxOneup; i++)
+	{
+		do
+		{
+			linie = rand() % 2 + 5;
+			coloana = rand() % 110 + 20;
+		} while (matrix[linie][coloana] != a && matrix[linie + 1][coloana] != a && matrix[linie + 1][coloana + 1] != a && matrix[linie + 1][coloana - 1] != a &&
+			matrix[linie][coloana] != a);
+
+		if (linie == 5)
+			if ((matrix[linie + 3][coloana - 1] == a || matrix[linie + 3][coloana - 1] == G) && (matrix[linie + 3][coloana] == a || matrix[linie + 3][coloana] == G) && (matrix[linie + 3][coloana + 1] == a || matrix[linie + 3][coloana + 1] == G))
+			{
+				matrix[linie + 3][coloana - 1] = e;
+				matrix[linie + 3][coloana] = e;
+				matrix[linie + 3][coloana + 1] = e;
+			}
+
+		matrix[linie][coloana] = L;
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	matrix[8][163] = fl; // endgame flag
+	matrix[8][164] = fr;
+	matrix[7][164] = P1;
+	matrix[6][164] = P2;
+	matrix[5][164] = P3;
+	matrix[6][100] = a;
+
+	matrix[6][5] = qF;
+	matrix[3][3] = M; //Mario
+
+
+}
 
 void loader::loadCurrentLevel(int level)
 {
@@ -96,7 +733,55 @@ void loader::loadCurrentLevel(int level)
 			}
 		}
 	}
+	else
+	{
 
+		loadGenerator();
+
+
+		int enemyRecorder;
+		int x = 0;
+		for (int i = 0; i < ROWS; i++)
+		{
+			for (int j = 0; j < COLS; j++)
+			{
+				map[j][i] = matrix[i][j];
+
+				//store left piranha as a reference to check distances later
+				if (map[j][i] == EPl)
+				{
+					enemyRecorder = misc.findFreeSprite();
+					piranhaPlants[x].id = enemyRecorder;
+					//so we know exactly which plant we are handling in the map
+					piranhaPlants[x].ReferenceJ = j;
+					piranhaPlants[x].ReferenceI = i;
+					dbSprite(piranhaPlants[x].id, 100, 100, EPl);
+					dbHideSprite(piranhaPlants[x].id);
+					piranhaPlants[x].typeOf = map[j][i];//left side or right side
+					piranhaPlants[x].isAlive = true;
+					x++;
+				}
+				else if (map[j][i] == EPr)
+				{
+					enemyRecorder = misc.findFreeSprite();
+					piranhaPlants[x].id = enemyRecorder;
+					//so we know exactly which plant we are handling in the map
+					piranhaPlants[x].ReferenceJ = j;
+					piranhaPlants[x].ReferenceI = i;
+					dbSprite(piranhaPlants[x].id, 100, 100, EPr);
+					dbHideSprite(piranhaPlants[x].id);
+					piranhaPlants[x].typeOf = map[j][i];//left side or right side
+					piranhaPlants[x].isAlive = true;
+					x++;
+				}
+			}
+		}
+
+
+	}
+
+
+}
 		
 }
 

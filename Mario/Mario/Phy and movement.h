@@ -46,7 +46,7 @@ public:
 
 	void phyAndMovement::gravity()							//CADEREA
 	{
-		if (amIAlive == true /* && stopMovement == false*/)
+		if (IaMarioAlive == true /* && stopMovement == false*/)
 		{
 			if (!touchingGround)					//nu atince pamantul. si nu sare. deci e in cadere
 			{
@@ -93,7 +93,7 @@ public:
 	{
 		int didMarioCollide = MarioWalkerCollision();
 
-		if (didMarioCollide != -1 && amIAlive == true)// pt a evita cazul : Goomba kill Mario si apoi Mario(dead) kill Goomba 
+		if (didMarioCollide != -1 && IsMarioAlive == true)// pt a evita cazul : Goomba kill Mario si apoi Mario(dead) kill Goomba 
 		{
 			// Daca mario e deasupra Goomba-ului la o anumita distanta, kill Goomba. Altfel, damage Mario.
 
@@ -302,11 +302,7 @@ public:
 	void phyAndMovement::controlCharacter()
 	{
 
-
-
-
-
-		if (amIAlive == true)
+		if (IsMarioAlive == true)
 		{
 			// in case moving mario causes a goomba to collide with something
 			//we can move them back
@@ -314,7 +310,7 @@ public:
 			{
 				if (walkers[i].isAlive)
 				{
-					if (amIAlive == true)
+					if (IsMarioAlive == true)
 					{
 						//store the map's x and y coordinates into the variables OldmapX and OldmapY
 
