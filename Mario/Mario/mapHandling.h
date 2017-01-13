@@ -242,4 +242,3 @@ public:
 		}
 	}
 };
-#pragma once
