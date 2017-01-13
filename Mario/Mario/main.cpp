@@ -1,9 +1,7 @@
 #include DarkGDK.h
-.............................................................................................................................................VV
 #include variables.h
 #include mapHandling.h
 #include Phy and movement.h 
-.............................................................................................................................................^^^
 #include globstruct.h USED FOR MESSAGE box 
 #include conio.h  pt pauza
 #include dinput.h			//DIK_P = tasta P
